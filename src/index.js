@@ -1,21 +1,34 @@
 import './sass/main.scss';
 import imageFingerPtl from './partials/image-finger.hbs';
+import debounce from 'lodash.debounce';
 import NewsApiService from './partials/apiService';
 import getRefs from './partials/getRefs';
+import LoadMoreBtn from './partials/loadMoreBtn';
 
 const refs = getRefs();
+
+const loadMore = new LoadMoreBtn({
+  selector: '[data-action="load-more"], spinner',
+  hidden: true,
+});
+
 const newsApiService = new NewsApiService();
 
-refs.searchForm.addEventListener('submit', onSearch);
+refs.searchForm.addEventListener('input', debounce(onSearch, 500));
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
 
-  ClearImageList();
-  newsApiService.query = e.currentTarget.elements.query.value;
+  loadMore.show();
+  loadMore.disable();
+  newsApiService.query = e.target.value;
   newsApiService.resetPage();
-  newsApiService.fetchImages().then(appendImagesMarkup);
+  newsApiService.fetchImages().then(data => {
+    ClearImageList();
+    appendImagesMarkup(data);
+    loadMore.enable();
+  });
 }
 
 function onLoadMore() {

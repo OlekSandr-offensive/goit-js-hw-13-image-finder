@@ -1,25 +1,31 @@
 import './sass/main.scss';
+import imageFingerPtl from './partials/image-finger.hbs';
 import NewsApiService from './partials/apiService';
+import getRefs from './partials/getRefs';
 
-const refs = {
-  searchForm: document.querySelector('.search-form'),
-  articlesList: document.querySelector('.articles-list'),
-  loadMoreBtn: document.querySelector('[data-action="load-more"]'),
-};
-
+const refs = getRefs();
 const newsApiService = new NewsApiService();
 
-refs.searchForm.addEventListener('input', onSearch);
+refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
 
+  ClearImageList();
   newsApiService.query = e.currentTarget.elements.query.value;
-
-  newsApiService.fetchArticles();
+  newsApiService.resetPage();
+  newsApiService.fetchImages().then(appendImagesMarkup);
 }
 
 function onLoadMore() {
-  newsApiService.fetchArticles();
+  newsApiService.fetchImages().then(appendImagesMarkup);
+}
+
+function appendImagesMarkup(data) {
+  refs.imageList.insertAdjacentHTML('beforeend', imageFingerPtl(data));
+}
+
+function ClearImageList() {
+  refs.imageList.innerHTML = '';
 }

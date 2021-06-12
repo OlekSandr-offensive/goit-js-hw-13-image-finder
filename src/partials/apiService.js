@@ -1,20 +1,30 @@
+const API_KEY = '21988624-a694c57feb3b9caad270c2fa0';
+const BASE_URL = 'https://pixabay.com/api';
+
 export default class NewsApiService {
-  component() {
+  constructor() {
     this.loadQuery = '';
     this.page = 1;
   }
 
-  fetchArticles() {
+  fetchImages() {
     console.log(this);
-    const API_KEY = '21988624-a694c57feb3b9caad270c2fa0';
+    const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.loadQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
 
-    const url = `https://pixabay.com/api/?image_type=photo&orientation=horizontal&q=${this.loadQuery}&page=${this.page}&per_page=12&key=${API_KEY}`;
-
-    fetch(url)
+    return fetch(url)
       .then(response => response.json())
       .then(data => {
-        this.page += 1;
+        this.incrementPage();
+        return data;
       });
+  }
+
+  incrementPage() {
+    this.page += 1;
+  }
+
+  resetPage() {
+    this.page = 1;
   }
 
   get query() {

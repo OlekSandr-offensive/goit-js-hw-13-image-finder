@@ -1,27 +1,136 @@
-.example {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell,
-    'Open Sans', 'Helvetica Neue', sans-serif;
-  line-height: 1.5;
-  background-color: #fff;
-  color: #424242;
-  max-width: 960px;
-  padding: 16px;
+body {
+  font-family: 'Rubik', sans-serif;
+  background-image: radial-gradient(
+    circle,
+    #ffffff,
+    #cfcfcf,
+    #a1a1a1,
+    #757575,
+    #4c4c4c
+  );
 }
 
-.example code {
-  font-family: monospace;
-  font-size: 16px;
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+input {
+  font-size: 20px;
   font-weight: 700;
-  background-color: #009688;
-  color: #fff;
-  padding: 2px 6px;
-  border-radius: 2px;
+  // transform: translateX(-50%);
+
+  height: 30px;
+  width: 400px;
+  padding-left: 20px;
+  padding-right: 20px;
+  background-image: linear-gradient(
+    to bottom,
+    #ffffff,
+    #dbdbdb,
+    #b8b8b8,
+    #969696,
+    #757576
+  );
+  color: black;
+
+  // position: fixed;
+
+  border-color: white;
+  border-radius: 5px;
+  outline: none;
+
+  transition: all 250ms ease;
 }
 
-.example .background {
-  height: 240px;
-  // Путь к изображениям из SASS-файла всегда такой, как из папки css
-  background-image: url('../images/demo.jpg');
-  background-size: cover;
-  background-position: center;
+input::placeholder {
+  text-align: center;
+  color: white;
+
+  font-family: 'Rubik', sans-serif;
+}
+
+.icon-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  padding-top: 60px;
+  padding-bottom: 60px;
+
+  margin-left: -15px;
+}
+
+img {
+  cursor: pointer;
+  object-fit: cover;
+}
+
+.photo-item {
+  margin-left: 15px;
+  margin-bottom: 15px;
+
+  border-radius: 5px;
+  border: 3px solid black;
+
+  overflow: hidden;
+}
+
+.stats {
+  display: flex;
+  padding: 5px 15px;
+
+  align-items: center;
+  justify-content: center;
+}
+.stats-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.stats-item:not(:last-child) {
+  margin-right: 14px;
+}
+
+.material-icons {
+  margin-right: 3px;
+}
+
+.btn {
+  display: inline-block;
+  border-radius: 4px;
+  padding: 10px 32px;
+  min-width: 200px;
+  align-items: center;
+
+  border-style: none;
+  color: #ffff;
+  background-image: linear-gradient(
+    to bottom,
+    #ffffff,
+    #dbdbdb,
+    #b8b8b8,
+    #969696,
+    #757576
+  );
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.15);
+  font-size: 16px;
+  line-height: 1.87;
+  text-align: center;
+  letter-spacing: 0.06em;
+  cursor: pointer;
 }

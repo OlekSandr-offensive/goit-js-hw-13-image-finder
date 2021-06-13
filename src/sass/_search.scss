@@ -24,28 +24,19 @@ ul {
 input {
   font-size: 20px;
   font-weight: 700;
-  // transform: translateX(-50%);
-
   height: 50px;
   width: 700px;
   padding-left: 20px;
   padding-right: 20px;
-  // background-color: gray;
   color: black;
-
-  // position: fixed;
-
-  // border-color: gray;
   border-radius: 5px;
   outline: none;
-
   transition: all 250ms ease;
 }
 
 input::placeholder {
   text-align: center;
   color: black;
-
   font-family: 'Rubik', sans-serif;
 }
 
@@ -54,10 +45,8 @@ input::placeholder {
   flex-wrap: wrap;
   justify-content: center;
   align-items: center;
-
   padding-top: 60px;
   padding-bottom: 60px;
-
   margin-left: -15px;
 }
 
@@ -69,17 +58,14 @@ img {
 .photo-item {
   margin-left: 15px;
   margin-bottom: 15px;
-
   border-radius: 5px;
   border: 3px solid black;
-
   overflow: hidden;
 }
 
 .stats {
   display: flex;
   padding: 5px 15px;
-
   align-items: center;
   justify-content: center;
 }
@@ -103,7 +89,6 @@ img {
   padding: 10px 32px;
   min-width: 200px;
   align-items: center;
-
   border-style: none;
   color: black;
   background-color: #ffff;

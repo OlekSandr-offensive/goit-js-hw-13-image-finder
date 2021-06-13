@@ -1,6 +1,6 @@
 export default class LoadMoreBtn {
   constructor({ selector, hidden = false }) {
-    this.refs = this.getRefs(selector, select);
+    this.refs = this.getRefs(selector);
 
     hidden && this.removeButton();
   }

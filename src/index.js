@@ -1,6 +1,5 @@
 import './sass/main.scss';
 import imageFingerPtl from './partials/image-finger.hbs';
-import debounce from 'lodash.debounce';
 import NewsApiService from './partials/apiService';
 import getRefs from './partials/getRefs';
 import LoadMoreBtn from './partials/loadMoreBtn';
@@ -8,26 +7,26 @@ import LoadMoreBtn from './partials/loadMoreBtn';
 const refs = getRefs();
 
 const loadMore = new LoadMoreBtn({
-  selector: '[data-action="load-more"], spinner',
+  selector: '[data-action="load-more"]',
   hidden: true,
 });
 
 const newsApiService = new NewsApiService();
 
-refs.searchForm.addEventListener('input', debounce(onSearch, 500));
+refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
 
 function onSearch(e) {
   e.preventDefault();
 
-  loadMore.show();
-  loadMore.disable();
-  newsApiService.query = e.target.value;
+  newsApiService.query = e.currentTarget.elements.query.value;
+  if (newsApiService.query.length === 0) {
+    return;
+  }
   newsApiService.resetPage();
   newsApiService.fetchImages().then(data => {
     ClearImageList();
     appendImagesMarkup(data);
-    loadMore.enable();
   });
 }
 
@@ -36,7 +35,16 @@ function onLoadMore() {
 }
 
 function appendImagesMarkup(data) {
+  if (newsApiService.per_page < 12) {
+    return;
+  }
+  console.log(newsApiService.per_page);
   refs.imageList.insertAdjacentHTML('beforeend', imageFingerPtl(data));
+  loadMore.addButton();
+  refs.loadMoreBtn.scrollIntoView({
+    behavior: 'smooth',
+    block: 'end',
+  });
 }
 
 function ClearImageList() {

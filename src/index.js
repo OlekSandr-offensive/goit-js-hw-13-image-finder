@@ -35,11 +35,11 @@ function onLoadMore() {
 }
 
 function appendImagesMarkup(data) {
-  if (newsApiService.per_page < 12) {
+  refs.imageList.insertAdjacentHTML('beforeend', imageFingerPtl(data));
+  if (data.hits.length < 12) {
+    loadMore.removeButton();
     return;
   }
-  console.log(newsApiService.per_page);
-  refs.imageList.insertAdjacentHTML('beforeend', imageFingerPtl(data));
   loadMore.addButton();
   refs.loadMoreBtn.scrollIntoView({
     behavior: 'smooth',

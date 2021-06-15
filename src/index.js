@@ -59,7 +59,7 @@ function onImageList(e) {
   if (e.target.nodeName !== 'IMG') {
     return;
   }
-  console.log(e.target.nodeName);
+
   const instance = basicLightbox.create(`
     <img src="${e.target.dataset.large}" alt="${e.target.alt}" width="800" height="600">
 `);

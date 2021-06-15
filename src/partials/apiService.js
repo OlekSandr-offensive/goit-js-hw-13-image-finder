@@ -9,7 +9,6 @@ export default class NewsApiService {
   }
 
   fetchImages() {
-    console.log(this);
     const url = `${BASE_URL}/?image_type=photo&orientation=horizontal&q=${this.loadQuery}&page=${this.page}&per_page=${this.per_page}&key=${API_KEY}`;
 
     return fetch(url)

@@ -3,6 +3,8 @@ import imageFingerPtl from './partials/image-finger.hbs';
 import NewsApiService from './partials/apiService';
 import getRefs from './partials/getRefs';
 import LoadMoreBtn from './partials/loadMoreBtn';
+import * as basicLightbox from 'basiclightbox';
+import '../node_modules/basiclightbox/dist/basiclightbox.min.css';
 
 const refs = getRefs();
 
@@ -15,6 +17,7 @@ const newsApiService = new NewsApiService();
 
 refs.searchForm.addEventListener('submit', onSearch);
 refs.loadMoreBtn.addEventListener('click', onLoadMore);
+refs.imageList.addEventListener('click', onImageList);
 
 function onSearch(e) {
   e.preventDefault();
@@ -49,4 +52,17 @@ function appendImagesMarkup(data) {
 
 function ClearImageList() {
   refs.imageList.innerHTML = '';
+}
+
+function onImageList(e) {
+  e.preventDefault();
+  if (e.target.nodeName !== 'IMG') {
+    return;
+  }
+  console.log(e.target.nodeName);
+  const instance = basicLightbox.create(`
+    <img src="${e.target.dataset.large}" alt="${e.target.alt}" width="800" height="600">
+`);
+
+  instance.show();
 }
